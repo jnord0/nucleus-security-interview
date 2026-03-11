@@ -1,0 +1,135 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #eee;
+  }
+  
+  #calculator {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    background: #f2f2f7;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    gap: 10px;
+  }
+  
+  #display {
+    background: #222;
+    color: white;
+    text-align: right;
+    padding: 16px;
+    border-radius: 10px;
+  }
+  
+  #expression {
+    font-size: 14px;
+    color: #aaa;
+    min-height: 20px;
+  }
+  
+  #current {
+    font-size: 40px;
+  }
+  #history {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  #history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  #history-header button {
+    height: auto;
+    padding: 4px 8px;
+    font-size: 12px;
+    background: #eee;
+    border-radius: 6px;
+    box-shadow: none;
+  }
+  
+  #history-list {
+    list-style: none;
+  }
+  
+  #history-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  #history-list li span.result {
+    font-weight: bold;
+    color: #ff9500;
+  }
+  
+  #buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  button {
+    height: 65px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #333;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  button:hover { background-color: #f0f0f0; }
+  
+  button:active {
+    transform: scale(0.96);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .operator {
+    background-color: orange;
+    color: white;
+  }
+  
+  .operator:hover { background-color: rgb(100, 68, 6); }
+  
+  .operator:active {
+    transform: scale(0.96);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .equal {
+    background-color: rgb(38, 224, 156);
+    color: white;
+  }
+  
+  .equal:hover { background-color: rgb(138, 138, 230); }
+  
+  .equal:active {
+    transform: scale(0.96);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
