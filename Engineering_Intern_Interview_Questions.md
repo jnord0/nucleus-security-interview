@@ -226,33 +226,6 @@ values are treated as data instead of SQL. Also change 'INSERT' to 'INSERT ... O
         f"INSERT INTO users(email, role) VALUES('{email}', '{role}')"
     )
 ```
-Output: 
-Yes, both queries are vulnerable to SQL injection. Here's why and how to fix it:<br>
-**The Problem**
-```python
-# If email = "'; DROP TABLE users; --"
-f"INSERT INTO users(email, role) VALUES('{email}', '{role}')"
-# Becomes: INSERT INTO users(email, role) VALUES(''; DROP TABLE users; --', 'admin')
-```
-String interpolation (f"...") directly embeds user input into the SQL query, allowing 
-an attacker to break out of the string literal and execute arbitrary SQL.<br>
-**The Fix** — Use Parameterized Queries
-```python
-# Store raw payload for auditing / debugging
-cur.execute(
-    "INSERT INTO webhook_audit(email, raw_json) VALUES (%s, %s)",
-    (email, raw.decode('utf-8'))
-)
-
-# Upsert user
-cur.execute(
-    "INSERT INTO users(email, role) VALUES (%s, %s)",
-    (email, role)
-)
-```
-Parameterized queries pass values separately from the SQL statement. The database driver
-handles escaping, so user input is always treated as data — never as executable SQL.<br>
-
 Accomplish: I was fairly certain that this could lead to SQL injection and wnated
 to double check. <br>
 
@@ -264,47 +237,7 @@ been more specific in what I wanted in the prompt.<br>
 **Prompt 2**:
 Correct syntax for an upsert in sqlite <br>
 
-Output: <br>
-In SQLite, the upsert syntax uses INSERT ... ON CONFLICT: <br>
-```sql
-sqlINSERT INTO table_name (col1, col2, col3)
-VALUES (val1, val2, val3)
-ON CONFLICT (conflict_col) DO UPDATE SET
-  col2 = excluded.col2,
-  col3 = excluded.col3;
-```
-Key points:
-- ON CONFLICT (col) — specifies which column triggers the conflict (usually a PRIMARY KEY or UNIQUE column)
-- excluded.col — refers to the value that would have been inserted
-- DO UPDATE SET — what to update when a conflict occurs
-- DO NOTHING — alternatively, silently skip on conflict
-
-Common examples:
-```sql
-sql-- Upsert by primary key
-INSERT INTO users (id, name, email)
-VALUES (1, 'Alice', 'alice@example.com')
-ON CONFLICT (id) DO UPDATE SET
-  name = excluded.name,
-  email = excluded.email;
-
--- Only update specific columns
-INSERT INTO products (sku, price, stock)
-VALUES ('ABC123', 9.99, 100)
-ON CONFLICT (sku) DO UPDATE SET
-  price = excluded.price;
-  -- stock is NOT updated on conflict
-
--- Do nothing on conflict
-INSERT INTO logs (event_id, message)
-VALUES (42, 'hello')
-ON CONFLICT (event_id) DO NOTHING;
-```
-Requires SQLite 3.24+ (released 2018). For older versions, the alternative was 
-INSERT OR REPLACE, but that deletes and re-inserts the row rather than updating it, 
-which can cause issues with foreign keys and auto-increment IDs.
-
-Accomplish: I knew that the code was just useing a regular INSERt instead of an UPSERt,
+Accomplish: I knew that the code was just useing a regular INSERT instead of an UPSERT,
 but wasn't sure on the correct syntax of one in SQLite. <br>
 
 Acually Did: It answered my question and then explained the key points before showing
