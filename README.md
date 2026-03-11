@@ -7,9 +7,9 @@ Using f-strings to build SQL queries is a security risk because it allows
 user input to be inserted directly into the query, which can lead to an SQL injection.<br>
 Plain insterts are being used instead of upserts which can cause an error or result 
 in duplicate rows of data. <br>
-Database connection is opened, but never closed which can lead to recourse issues. <br>
-No validation of fields, should through an error if email is empty instead of add ""
-into the database. <br> 
+Database connection is opened, but never closed which can lead to resource issues. <br>
+No validation of fields, should throw an error if an email is empty instead of adding an empty 
+string into the database. <br> 
 
 
 (168 and 173) This should use parameterized queries with (?) as a placeholder, so the
