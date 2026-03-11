@@ -130,9 +130,27 @@ Request body:
 ```json
 { "a": 5, "b": 3, "operator": "+" }
 ```
-
 Response:
 ```json
 { "result": 8, "expression": "5.0 + 3.0" }
 ```
 
+## Follow-up Question:
+**How Far:** I was able to get pretty far with the calculator and was able to incorporate a little bit of a backend. After getting the front end looking nice and the basic calculator functions working, the backend came next. I was able to finish the main things I wanted to do and feel good about what I accomplished. <br>
+**Challenges:** The initial setup of the HTML and CSS tripped me up a couple of times because I haven’t worked with them much recently. It took some experimentation with the CSS to get a design that I thought looked good. Another problem I ran into was when I connected the backend to the frontend; right after something was calculated, it would be wiped. It took a little bit of testing, but I found out it was because the operator was getting cleared, which caused a chain reaction leading to the state becoming ‘error”. This then cleared the display, which was not what a calculator normally does.<br>
+**Future:** I think the end goal would be to have all the math functions that can be done in Python added to the calculator. Another good addition would be to use something like Plotly to make graphs from the calculator.<br>
+**AI**:<br>
+1a. Create a basic HTML file that contains everything needed for a calculator.
+2a. It created an HTML file with everything that I needed to get started with appropriate id’s and onlicks.
+3a. I just wanted the HTML part, but it also added JavaScript functions and CSS to the file.
+4a. I had to specifically say to just have HTML, nothing else in the file.
+	
+1b. Make a CSS file that will make it look like a basic calculator.
+2b. It made all the numbers line up how they would on a calculator.
+3b. It made the display portion sit on the left of the numbers instead of above, and it was smaller than it should have been.
+4b. I would have to be more specific and explain in detail what I want.
+	
+1c. What could be done for the backend of a calculator app?
+2c. It gave some good suggestions, with the easier ones first and progressing to more difficult additions.
+3c. Some of the suggestions were stuff that no calculator I have ever used needed to have and seemed to be way overboard.
+4c. I think it did a good enough job, but I can always be more specific.
