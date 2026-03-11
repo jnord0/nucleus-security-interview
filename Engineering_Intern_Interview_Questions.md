@@ -260,6 +260,59 @@ Actually Did: It answered my question and then gave a fix to the problem.<br>
 Change: It gave a little bit more information than I required, so I could have
 been more specific in what I wanted in the prompt.<br>
 
+Prompt 2:
+Correct syntax for an upsert in sqlite <br>
+
+Output: <br>
+In SQLite, the upsert syntax uses INSERT ... ON CONFLICT: <br>
+```sql
+sqlINSERT INTO table_name (col1, col2, col3)
+VALUES (val1, val2, val3)
+ON CONFLICT (conflict_col) DO UPDATE SET
+  col2 = excluded.col2,
+  col3 = excluded.col3;
+```
+Key points:
+- ON CONFLICT (col) — specifies which column triggers the conflict (usually a PRIMARY KEY or UNIQUE column)
+- excluded.col — refers to the value that would have been inserted
+- DO UPDATE SET — what to update when a conflict occurs
+- DO NOTHING — alternatively, silently skip on conflict
+
+Common examples:
+```sql
+sql-- Upsert by primary key
+INSERT INTO users (id, name, email)
+VALUES (1, 'Alice', 'alice@example.com')
+ON CONFLICT (id) DO UPDATE SET
+  name = excluded.name,
+  email = excluded.email;
+
+-- Only update specific columns
+INSERT INTO products (sku, price, stock)
+VALUES ('ABC123', 9.99, 100)
+ON CONFLICT (sku) DO UPDATE SET
+  price = excluded.price;
+  -- stock is NOT updated on conflict
+
+-- Do nothing on conflict
+INSERT INTO logs (event_id, message)
+VALUES (42, 'hello')
+ON CONFLICT (event_id) DO NOTHING;
+```
+Requires SQLite 3.24+ (released 2018). For older versions, the alternative was 
+INSERT OR REPLACE, but that deletes and re-inserts the row rather than updating it, 
+which can cause issues with foreign keys and auto-increment IDs.
+
+Accomplish: I knew that the code was just useing a regular INSERt instead of an UPSERt,
+but wasn't sure on the correct syntax of one in SQLite. <br>
+
+Acually Did: It answered my question and then explained the key points before showing
+a lot of examples. <br>
+
+Change: Just like the last prompt it asnwered my question right at the start, but than continued 
+on giving more information than I asked for. Being more spefic seems to be the best course of action,
+so there is less left up for interretation.
+
 ------------------------------------------------------------------------
 
 # Coding Challenge (\~50 minutes)
