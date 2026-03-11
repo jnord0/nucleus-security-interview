@@ -212,8 +212,9 @@ values are treated as data instead of SQL. Also change 'INSERT' to 'INSERT ... O
     -   Tell us what it actually did.
     -   Did you have to re-prompt it based on its output?
     -   If you had to change your approach, why?
+<br>
 
-Prompt 1: This can lead to sql injection, right?
+**Prompt 1**: This can lead to sql injection, right?
 ``` python
 # Store raw payload for auditing / debugging
     cur.execute(
@@ -259,8 +260,8 @@ Actually Did: It answered my question and then gave a fix to the problem.<br>
 
 Change: It gave a little bit more information than I required, so I could have
 been more specific in what I wanted in the prompt.<br>
-
-Prompt 2:
+<br>
+**Prompt 2**:
 Correct syntax for an upsert in sqlite <br>
 
 Output: <br>
