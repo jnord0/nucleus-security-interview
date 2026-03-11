@@ -187,17 +187,17 @@ if __name__ == "__main__":
 (python)
 
 Using f-strings to build SQL queries is a security risk because it allows 
-user input to be inserted directly into the query, which can lead to SQL injection.\
+user input to be inserted directly into the query, which can lead to SQL injection.<br>
 Plain insterts are being used instead of upserts which can cause an error or result 
-in duplicate rows of data. \
-Database connection is opened, but never closed which can lead to recourse issues.\
+in duplicate rows of data. <br>
+Database connection is opened, but never closed which can lead to recourse issues. <br>
 No validation of fields, should through an error if email is empty instead of add ""
-into the database.\
+into the database. <br>
 
 
 (168 and 173) This should use parameterized queries with (?) as a placeholder, so the
-values are treated as data instead of SQL. Also change 'INSERT' to 'INSERT ... ON CONFLICT'.\
-(156) No error handling if the JSON is not valid\
+values are treated as data instead of SQL. Also change 'INSERT' to 'INSERT ... ON CONFLICT'. <br>
+(156) No error handling if the JSON is not valid<br>
 (136) If teh secret is missing the app should fail to start
 
 
@@ -226,7 +226,7 @@ Prompt 1: This can lead to sql injection, right?
     )
 ```
 Output: 
-Yes, both queries are vulnerable to SQL injection. Here's why and how to fix it:\
+Yes, both queries are vulnerable to SQL injection. Here's why and how to fix it:<br>
 **The Problem**
 ```python
 # If email = "'; DROP TABLE users; --"
@@ -234,7 +234,7 @@ f"INSERT INTO users(email, role) VALUES('{email}', '{role}')"
 # Becomes: INSERT INTO users(email, role) VALUES(''; DROP TABLE users; --', 'admin')
 ```
 String interpolation (f"...") directly embeds user input into the SQL query, allowing 
-an attacker to break out of the string literal and execute arbitrary SQL.\
+an attacker to break out of the string literal and execute arbitrary SQL.<br>
 **The Fix** — Use Parameterized Queries
 ```python
 # Store raw payload for auditing / debugging
@@ -250,15 +250,15 @@ cur.execute(
 )
 ```
 Parameterized queries pass values separately from the SQL statement. The database driver
-handles escaping, so user input is always treated as data — never as executable SQL.\
+handles escaping, so user input is always treated as data — never as executable SQL.<br>
 
 Accomplish: I was fairly certain that this could lead to SQL injection and wnated
-to double check. \
+to double check. <br>
 
-Actually Did: It answered my question and then gave a fix to the problem.\
+Actually Did: It answered my question and then gave a fix to the problem.<br>
 
 Change: It gave a little bit more information than I required, so I could have
-been more specific in what I wanted in the prompt.\
+been more specific in what I wanted in the prompt.<br>
 
 ------------------------------------------------------------------------
 
