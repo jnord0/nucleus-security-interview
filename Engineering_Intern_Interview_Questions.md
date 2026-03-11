@@ -192,7 +192,7 @@ Plain insterts are being used instead of upserts which can cause an error or res
 in duplicate rows of data. <br>
 Database connection is opened, but never closed which can lead to recourse issues. <br>
 No validation of fields, should through an error if email is empty instead of add ""
-into the database. <br>
+into the database. <br> 
 
 
 (168 and 173) This should use parameterized queries with (?) as a placeholder, so the
